@@ -1,10 +1,11 @@
-package com.leco.restcountries;
+package com.leco.restcountries.Entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "callingcodes")
 public class CallingCodes {
+
     @Id
     private String code;
     @ManyToOne(fetch = FetchType.LAZY)

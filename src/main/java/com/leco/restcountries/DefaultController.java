@@ -1,14 +1,12 @@
 package com.leco.restcountries;
 
+import com.leco.restcountries.Entities.Country;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +20,7 @@ public class DefaultController {
 
     private static final Logger log = LoggerFactory.getLogger(RestcountriesApplication.class);
 
-    @RequestMapping
-    public String index(){
-        return "index";
-    }
+
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -34,7 +29,13 @@ public class DefaultController {
         return builder.build();
     }
 
+    // Index mapping
+    @RequestMapping
+    public String index(){
+        return "index";
+    }
 
+    // Find GET mapping
     @RequestMapping(value = "/find",method = RequestMethod.GET)
     public String first(@RequestParam(value="countryCode", required=false, defaultValue="be") String countryCode, Model model) {
         model.addAttribute("countryCode", countryCode);
@@ -42,6 +43,7 @@ public class DefaultController {
         return "find";
     }
 
+    // Find POST mapping -> request info from restcountries API using RestTemplate
     @RequestMapping(value = "/find",method = RequestMethod.POST)
     public String findSubmit(@RequestParam("countryCode") String countryCode, Model model){
         Country country = new Country();
@@ -50,8 +52,6 @@ public class DefaultController {
                 "?fields=name;capital;currencies;flag;callingcodes;population;rates";
         log.info(res);
         try {
-//            country = restTemplate.getForObject(
-//                    "https://restcountries.eu/rest/v2/alpha/"+ countryCode +"?fields=name;capital;currencies;flag;callingCodes;population", Country.class);
             country = restTemplate.getForObject(
                     "https://restcountries.eu/rest/v2/alpha/"+ countryCode +"?fields=name;capital;currencies;flag;callingCodes;population;rates", Country.class);
 
@@ -60,29 +60,19 @@ public class DefaultController {
             log.info(e.toString());
 
         }
-        Rates rates = new Rates();
-        try {
+//        Rates rates = new Rates();
+//        try {
 //            rates = restTemplate.getForObject("http://api.fixer.io/latest?symbols="+ country.getCurrencies().get(0).getCode(), Rates.class);
 //            country.setRates(rates);
-        }
-        catch (Exception e){
-            log.info(e.toString());
-        }
+//        }
+//        catch (Exception e){
+//            log.info(e.toString());
+//        }
 
-            log.info(country.toString());
+            log.info(country.toString()); // Logging country information
             model.addAttribute("country",country);
 
         return "find";
     }
 
-    @RequestMapping(value = "/greeting",method = RequestMethod.GET)
-    public String greetingForm(Model model) {
-        model.addAttribute("greeting", new Greeting());
-        return "greeting";
-    }
-
-    @RequestMapping(value = "/greeting",method = RequestMethod.POST)
-    public String greetingSubmit(@ModelAttribute Greeting greeting) {
-        return "result";
-    }
 }

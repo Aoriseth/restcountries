@@ -1,4 +1,4 @@
-package com.leco.restcountries;
+package com.leco.restcountries.Entities;
 
 import javax.persistence.*;
 
