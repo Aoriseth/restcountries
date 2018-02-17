@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restful Countries</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+
+
+    <h1>Request data from restcountries:</h1>
+    <form action="#" th:action="@{/find}" method="post">
+        <p>Country Code: <input type="text" th:name="countryCode" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Clear" /></p>
+    </form>
+
+    <a th:href="@{/}">Back</a>
+
+    <br/>
+    <div style="border-style: double;">
+        <p th:text="'Name: '+ ${country.name}"/>
+        <p th:text="'Capital: '+ ${country.capital}"/>
+        <p th:text="'CallingCodes: '+ ${country.callingCodes}"/>
+        <p th:text="'Population: '+ ${country.population} + ' inhabitants'"/>
+        <p th:text="'Flag: '+ ${country.flag}"/>
+        <img th:src="${country.flag}" style="width: 30%"/>
+        <p th:text="'Currencies: '+ ${country.currencies}"/>
+        <p th:text="'Rates: '+ ${country.rates}"/>
+    </div>
+
+</body>
+</html>
