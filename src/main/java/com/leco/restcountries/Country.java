@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "countries")
-public class Countrydb {
+public class Country {
 
     @Id
     private int country_id;
@@ -22,6 +22,14 @@ public class Countrydb {
     @JoinTable(name = "countrycodes",joinColumns = @JoinColumn(name = "country_id"),inverseJoinColumns = @JoinColumn(name = "base"))
     private Set<Rates> rates = new HashSet<>();
 
+
+    public int getCountry_id() {
+        return country_id;
+    }
+
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
+    }
 
     public String getName() {
         return name;
@@ -55,5 +63,41 @@ public class Countrydb {
         this.flag = flag;
     }
 
+    public Set<Currency> getCurrencies() {
+        return currencies;
+    }
 
+    public void setCurrencies(Set<Currency> currencies) {
+        this.currencies = currencies;
+    }
+
+    public Set<Currency> getCallingCodes() {
+        return CallingCodes;
+    }
+
+    public void setCallingCodes(Set<Currency> callingCodes) {
+        CallingCodes = callingCodes;
+    }
+
+    public Set<Rates> getRates() {
+        return rates;
+    }
+
+    public void setRates(Set<Rates> rates) {
+        this.rates = rates;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "country_id=" + country_id +
+                ", name='" + name + '\'' +
+                ", capital='" + capital + '\'' +
+                ", population='" + population + '\'' +
+                ", flag='" + flag + '\'' +
+                ", currencies=" + currencies +
+                ", CallingCodes=" + CallingCodes +
+                ", rates=" + rates +
+                '}';
+    }
 }

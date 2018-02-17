@@ -10,10 +10,26 @@ public class Currency {
     private int id_cur;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id",nullable = false)
-    private Countrydb country;
+    private Country country;
     private String code;
     private String name;
     private String symbol;
+
+    public int getId_cur() {
+        return id_cur;
+    }
+
+    public void setId_cur(int id_cur) {
+        this.id_cur = id_cur;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
     public String getCode() {
         return code;
@@ -41,7 +57,12 @@ public class Currency {
 
     @Override
     public String toString() {
-        return ""+name+" - "+code+" "+symbol;
-
+        return "Currency{" +
+                "id_cur=" + id_cur +
+                ", country=" + country +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", symbol='" + symbol + '\'' +
+                '}';
     }
 }

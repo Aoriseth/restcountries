@@ -5,6 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "callingcodes")
 public class CallingCodes {
+    @Id
+    private String code;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+
     public String getCode() {
         return code;
     }
@@ -13,12 +19,19 @@ public class CallingCodes {
         this.code = code;
     }
 
+    public Country getCountry() {
+        return country;
+    }
 
-    @Id
-    private String code;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", nullable = false)
-    private Countrydb country;
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
-
+    @Override
+    public String toString() {
+        return "CallingCodes{" +
+                "code='" + code + '\'' +
+                ", country=" + country +
+                '}';
+    }
 }

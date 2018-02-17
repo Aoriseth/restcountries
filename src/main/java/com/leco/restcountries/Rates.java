@@ -14,9 +14,49 @@ class Rates {
     @Id
     private String base;
     @ManyToMany(mappedBy = "rates")
-    private Set<Countrydb> countries = new HashSet<>();
+    private Set<Country> countries = new HashSet<>();
     private String date;
     private Float rate;
 
+    public String getBase() {
+        return base;
+    }
 
+    public void setBase(String base) {
+        this.base = base;
+    }
+
+    public Set<Country> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Set<Country> countries) {
+        this.countries = countries;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Float getRate() {
+        return rate;
+    }
+
+    public void setRate(Float rate) {
+        this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Rates{" +
+                "base='" + base + '\'' +
+                ", countries=" + countries +
+                ", date='" + date + '\'' +
+                ", rate=" + rate +
+                '}';
+    }
 }
